@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A local Sparring Ring demonstration and a proposal for data-defined signature moves in Dungeons & Dynasties.">
+  <title>Custom Signature Moves for Dungeons &amp; Dynasties</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --background: #121b18;
+      --surface: #1e2b25;
+      --ink: #f4f0e6;
+      --body: #d0dcd3;
+      --accent: #b9dfbb;
+      --notice: #f0dcb0;
+      --line: #455d51;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--background);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: radial-gradient(ellipse at 20% 0%, #22342a 0, transparent 34rem);
+      font-size: 1rem;
+      line-height: 1.65;
+    }
+
+    main {
+      width: min(100% - clamp(2rem, 7vw, 5rem), 65rem);
+      margin-inline: auto;
+      padding: clamp(2rem, 6vw, 4.5rem) 0 4rem;
+    }
+
+    .status {
+      display: inline-block;
+      margin: 0 0 1.25rem;
+      padding: .4rem .75rem;
+      border: 1px solid #806c47;
+      border-radius: .35rem;
+      background: #343023;
+      color: var(--notice);
+      font-size: .9375rem;
+      font-weight: 650;
+      line-height: 1.45;
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      line-height: 1.12;
+    }
+
+    h1, h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 600;
+    }
+
+    h1 {
+      font-size: clamp(2.125rem, 5.6vw, 4.25rem);
+      letter-spacing: -.025em;
+    }
+
+    h1 span {
+      display: block;
+    }
+
+    .intro {
+      max-width: 62ch;
+      margin: 1rem 0 1.5rem;
+      color: var(--body);
+      font-size: clamp(1rem, 2vw, 1.1875rem);
+    }
+
+    strong { color: var(--ink); }
+
+    figure { margin: 0; }
+
+    video {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 9;
+      border: 1px solid var(--line);
+      border-radius: .5rem;
+      background: #0b100e;
+    }
+
+    figcaption {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: .25rem 1rem;
+      margin-top: .65rem;
+      color: var(--body);
+      font-size: .9375rem;
+    }
+
+    a {
+      color: var(--accent);
+      text-underline-offset: .2em;
+    }
+
+    a:hover { color: var(--ink); }
+
+    :focus-visible {
+      outline: 2px solid var(--notice);
+      outline-offset: 3px;
+    }
+
+    article {
+      margin-top: clamp(2rem, 6vw, 3.75rem);
+      padding-top: clamp(1.5rem, 4vw, 2.5rem);
+      border-top: 1px solid var(--line);
+    }
+
+    .proposal {
+      max-width: 47rem;
+      margin-inline: auto;
+    }
+
+    h2 {
+      font-size: clamp(1.75rem, 4.2vw, 2.8rem);
+    }
+
+    h3 {
+      margin-top: 2rem;
+      color: var(--accent);
+      font-size: clamp(1.125rem, 2.4vw, 1.35rem);
+    }
+
+    article p, article ol {
+      margin-block: .8rem 1rem;
+      color: var(--body);
+    }
+
+    article ol { padding-inline-start: 1.5rem; }
+    li + li { margin-top: .35rem; }
+
+    code {
+      font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+      overflow-wrap: anywhere;
+    }
+
+    pre {
+      margin-block: 1rem;
+      padding: clamp(.75rem, 2.6vw, 1.25rem);
+      border: 1px solid var(--line);
+      border-inline-start: .2rem solid var(--accent);
+      border-radius: .35rem;
+      background: var(--surface);
+      font-size: .875rem;
+      line-height: 1.65;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .question {
+      margin-top: 1.75rem;
+      padding: .8rem 1rem;
+      border-inline-start: 2px solid var(--accent);
+      background: var(--surface);
+      color: var(--ink);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="status">Unofficial prototype · Tested locally in the 3.04 web Sparring Ring</p>
+      <h1>Custom Signature Moves <span>for Dungeons &amp; Dynasties</span></h1>
+      <p class="intro"><strong>Blink Slash</strong> and <strong>Flash Strike</strong> use the same executor. Removing Blink Slash’s on-hit mana drain gives you Flash Strike.</p>
+    </header>
+
+    <figure>
+      <video src="./R04_DEMO.mp4" controls playsinline preload="metadata" width="1920" height="1080" aria-label="Blink Slash and Flash Strike demonstration">
+        Your browser does not support embedded video.
+      </video>
+      <figcaption>
+        <span>One-minute demo · No audio</span>
+        <a href="./R04_DEMO.mp4">Open the MP4 directly</a>
+      </figcaption>
+    </figure>
+
+    <article aria-labelledby="proposal-title">
+      <div class="proposal">
+        <h2 id="proposal-title">A small Workshop interface for custom skills</h2>
+        <p>Brett,</p>
+        <p>Workshop authors could give players more skill variety by combining actions the game already knows how to run. Authors could make a new skill without needing another built-in preset. The local prototype is a starting point for discussing an official interface owned by the game.</p>
+
+        <h3>Suggested interface</h3>
+        <ol>
+          <li>Load and validate skill definitions from a Workshop data file.</li>
+          <li>Let a custom class reference a validated skill ID as its signature move.</li>
+          <li>Have the game execute a bounded list of allowlisted actions in order, using native damage and healing resolution.</li>
+        </ol>
+        <p>The filename <code>workshop-skills.json</code>, class field <code>callingSkillId</code>, and fields below are illustrative proposals. This excerpt follows target selection and landing validation. The last action is optional and runs only when the native attack reports a hit.</p>
+        <pre><code>{
+  "actions": [
+    { "type": "strikeFromLanding", "landing": "landing", "power": 1, "as": "strike" },
+    { "type": "drainMana", "result": "strike", "when": "hit", "amount": 15 }
+  ]
+}</code></pre>
+        <p>Workshop files supply data only. The game owns the action handlers and conditions. Report unknown actions, invalid values, and missing references with the source file and field path. For duplicate IDs, identify the conflicting files and mark that ID unavailable. Fall back to the original calling only for affected bindings. Unbound classes keep their native behavior.</p>
+
+        <h3>Verified in the local prototype</h3>
+        <p>First Aid, Blink Slash, and Flash Strike share one executor in the Sparring Ring of the fixed 3.04 HTML5 build. Flash Strike used a new skill JSON and a test binding change. In the same-seed comparison, both attacks hit the same target for the same HP loss, and only Blink Slash drained 15 mana. Both skills also fired again after their natural cooldowns in one bout.</p>
+
+        <h3>Suggested scope and open checks</h3>
+        <p>The prototype binds explicit test instance IDs. Class-level Workshop binding is the proposed extension. The current executor allows up to eight steps with one main resolution, and blink and attack remain one action. Steam, Workshop subscriptions, delves, and seasons are untested.</p>
+        <p class="question">Would you be interested in a Workshop interface where mods define skills as data and the game runs the actions, and in taking a look at this prototype?</p>
+      </div>
+    </article>
+  </main>
+</body>
+</html>
